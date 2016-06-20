@@ -10,23 +10,22 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
-
-#define tam_bucket 200000
+#include <windows.h>
+#define tam_bucket 5000
 #define num_bucket 10
 
 struct timeval tv1, tv2;
 
 typedef struct {
     int topo;
-    int balde[tam_bucket];
+    int* balde;
 }bucket;
 
 void bucket_sort(int v[],int tam, int type);
 int cmpfunc (const void * a, const void * b);
-int *insertionsort(int original[], int length);
+int *insertionsort(int* original, int length);
 
-
-int *insertionsort(int original[], int length){
+int *insertionsort(int* original, int length){
     int i, j, atual;
 
     for (i = 1; i < length; i++){
@@ -45,13 +44,21 @@ int *insertionsort(int original[], int length){
 }
 
 
-void bucket_sort(int v[],int tam, int type){
+void bucket_sort(int* v,int tam, int type){
     bucket b[num_bucket];
+
     int i,j,k;
+
     for(i=0;i<num_bucket;i++){ //inicializa todos os "topo"
         b[i].topo=0;
+        b[i].balde = (int*)malloc(sizeof(int) * tam);
+        if(!(b[i].balde)){
+            printf("Não conseguiu alocar int[%d]\n",tam);
+            exit(1);
+        }
     }
 
+    //printf("teste");
 
     for(i=0;i<tam;i++){ //verifica em que balde o elemento deve ficar
         j=(num_bucket)-1;
@@ -59,7 +66,7 @@ void bucket_sort(int v[],int tam, int type){
             if(j<0)
                 break;
             if(v[i]>=j*10){
-                b[j].balde[b[j].topo]=v[i];
+                b[j].balde[b[j].topo] = v[i];
                 (b[j].topo)++;
                 break;
             }
@@ -74,10 +81,10 @@ void bucket_sort(int v[],int tam, int type){
                     insertionsort(b[i].balde, b[i].topo);
                     break;
                 case 2:
-                    mergesort(b[i].balde, b[i].topo, sizeof(int), cmpfunc);
+                    //mergesort(b[i].balde, b[i].topo, sizeof(int), cmpfunc);
                     break;
                 case 3:
-                    heapsort(b[i].balde, b[i].topo, sizeof(int), cmpfunc);
+                    //heapsort(b[i].balde, b[i].topo, sizeof(int), cmpfunc);
                     break;
                 case 4:
                     qsort(b[i].balde, b[i].topo, sizeof(int), cmpfunc);
@@ -94,6 +101,11 @@ void bucket_sort(int v[],int tam, int type){
             i++;
         }
     }
+
+    for(i=0;i<num_bucket;i++){ //libera memoria"
+        free(b[i].balde);
+    }
+
 }
 
 int cmpfunc (const void * a, const void * b){
@@ -106,14 +118,15 @@ int main(int argc, const char * argv[]){
     int i, j, k, qntd = 0;
     int simulations = 1;
 
+
     for(j = 0; j < 9; j++){
 
         qntd = tam[j]; //Armazena o tamanho do vetor escolhido
 
-        int vetI[qntd]; //Cria o vetor com o tamanho escolhido
-        int vetM[qntd];
-        int vetH[qntd];
-        int vetQ[qntd];
+        int* vetI = (int*)malloc(sizeof(int) * qntd); //Cria o vetor com o tamanho escolhido
+        int* vetM = (int*)malloc(sizeof(int) * qntd);
+        int* vetH = (int*)malloc(sizeof(int) * qntd);
+        int* vetQ = (int*)malloc(sizeof(int) * qntd);
 
         double mediaI = 0;
         double mediaM = 0;
@@ -129,7 +142,7 @@ int main(int argc, const char * argv[]){
                 //printf("%d ", vetI[i]);
             }
             //printf("\n");
-
+            //printf("Iniciando simulacao\n");
 
             //INSERTION SORT
             gettimeofday(&tv1, NULL);
@@ -181,6 +194,10 @@ int main(int argc, const char * argv[]){
         mediaH = mediaH/simulations;
         mediaQ = mediaQ/simulations;
 
+        free(vetI);
+        free(vetM);
+        free(vetH);
+        free(vetQ);
 
         printf("Media: %f %f %f %f\n", mediaI, mediaM, mediaH, mediaQ);
 
