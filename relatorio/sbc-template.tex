@@ -3,160 +3,171 @@
 \usepackage{sbc-template}
 
 \usepackage{graphicx,url}
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[]{algorithm2e}
 
-%\usepackage[brazil]{babel}   
-\usepackage[latin1]{inputenc}  
-
-     
 \sloppy
 
-\title{Instructions for Authors of SBC Conferences\\ Papers and Abstracts}
+\title{Análise de desempenho do algoritmo \textit{bucketsort} com diferentes subalgoritmos de ordenação}
 
-\author{Luciana P. Nedel\inst{1}, Rafael H. Bordini\inst{2}, Flávio Rech
-  Wagner\inst{1}, Jomi F. Hübner\inst{3} }
+\author{Eugenio Souza Carvalho\inst{1}, Hugo Santos Piauilino Neto\inst{1}}
 
 
-\address{Instituto de Informática -- Universidade Federal do Rio Grande do Sul
-  (UFRGS)\\
-  Caixa Postal 15.064 -- 91.501-970 -- Porto Alegre -- RS -- Brazil
-\nextinstitute
-  Department of Computer Science -- University of Durham\\
-  Durham, U.K.
-\nextinstitute
-  Departamento de Sistemas e Computação\\
-  Universidade Regional de Blumenal (FURB) -- Blumenau, SC -- Brazil
-  \email{\{nedel,flavio\}@inf.ufrgs.br, R.Bordini@durham.ac.uk,
-  jomi@inf.furb.br}
+\address{Departamento de Computação\\
+	Universidade Federal do Piauí
+	(UFPI)\\
+	Teresina -- PI -- Brazil
+	\email{\{hugos94,eugeniucarvalho\}@gmail.com}
 }
+
+\SetKwProg{Fn}{Function}{}{}
 
 \begin{document} 
 
 \maketitle
 
 \begin{abstract}
-  This meta-paper describes the style to be used in articles and short papers
-  for SBC conferences. For papers in English, you should add just an abstract
-  while for the papers in Portuguese, we also ask for an abstract in
-  Portuguese (``resumo''). In both cases, abstracts should not have more than
-  10 lines and must be in the first page of the paper.
+	This paper presents a performance analysis of \textit{bucketsort} algorithm with different sorting sub-algorithms, in addition to a general overview of the history and operation of the algorithm.
 \end{abstract}
-     
+
 \begin{resumo} 
-  Este meta-artigo descreve o estilo a ser usado na confecção de artigos e
-  resumos de artigos para publicação nos anais das conferências organizadas
-  pela SBC. É solicitada a escrita de resumo e abstract apenas para os artigos
-  escritos em português. Artigos em inglês deverão apresentar apenas abstract.
-  Nos dois casos, o autor deve tomar cuidado para que o resumo (e o abstract)
-  não ultrapassem 10 linhas cada, sendo que ambos devem estar na primeira
-  página do artigo.
+	Este trabalho apresenta uma análise de desempenho do algoritmo de ordenação \textit{buicksort} com diferentes subalgoritmos de ordenação, além de apresentar um resumo geral sobre a história e funcionamento do algoritmo. 
 \end{resumo}
 
 
-\section{General Information}
+\section{Introdução}
 
-All full papers and posters (short papers) submitted to some SBC conference,
-including any supporting documents, should be written in English or in
-Portuguese. The format paper should be A4 with single column, 3.5 cm for upper
-margin, 2.5 cm for bottom margin and 3.0 cm for lateral margins, without
-headers or footers. The main font must be Times, 12 point nominal size, with 6
-points of space before each paragraph. Page numbers must be suppressed.
+Problemas são questões propostas em busca de uma solução. Algoritmos são utilizados com o propósito de conceder uma solução para certo problema. Para todo problema decidível existe um algoritmo que determina uma solução para as instâncias desse problema.
 
-Full papers must respect the page limits defined by the conference.
-Conferences that publish just abstracts ask for \textbf{one}-page texts.
+Algoritmos descrevem passo a passo os procedimentos para chegar a uma solução de um problema e podem ser representados de três formas: descrição narrativa, fluxograma e a linguagem algorítmica. Neste trabalho focaremos na utilização da última forma.
 
-\section{First Page} \label{sec:firstpage}
+Algoritmo de ordenação, em ciência da computação, é um algoritmo que coloca os elementos de uma dada sequência em uma certa ordem. Em outras palavras efetua sua ordenação completa ou parcial de acordo com uma necessidade pré-estabelecida. O objetivo da ordenação é facilitar a recuperação dos dados de uma lista.
 
-The first page must display the paper title, the name and address of the
-authors, the abstract in English and ``resumo'' in Portuguese (``resumos'' are
-required only for papers written in Portuguese). The title must be centered
-over the whole page, in 16 point boldface font and with 12 points of space
-before itself. Author names must be centered in 12 point font, bold, all of
-them disposed in the same line, separated by commas and with 12 points of
-space after the title. Addresses must be centered in 12 point font, also with
-12 points of space after the authors' names. E-mail addresses should be
-written using font Courier New, 10 point nominal size, with 6 points of space
-before and 6 points of space after.
+Os mais populares algoritmos de ordenação são: \textit{insertionsort}, \textit{selectionsort}, \textit{bubblesort}, \textit{combsort}, \textit{quicksort}, \textit{mergesort}, \textit{heapsort} e \textit{shellsort}. Neste artigo, o algoritmo \textit{quicksort} será analisado, explicando o seu funcionamento, suas peculiaridades e o comportamento do seu particionamento.
 
-The abstract and ``resumo'' (if is the case) must be in 12 point Times font,
-indented 0.8cm on both sides. The word \textbf{Abstract} and \textbf{Resumo},
-should be written in boldface and must precede the text.
+\section{\textit{Bucketsort}}
 
-\section{CD-ROMs and Printed Proceedings}
+\section{Estratégia Utilizada}
 
-In some conferences, the papers are published on CD-ROM while only the
-abstract is published in the printed Proceedings. In this case, authors are
-invited to prepare two final versions of the paper. One, complete, to be
-published on the CD and the other, containing only the first page, with
-abstract and ``resumo'' (for papers in Portuguese).
+O \textit{quicksort} adota a estratégia de divisão e conquista. Essa estratégia consiste em rearranjar as chaves do problema de modo que chaves "menores" precedam chaves "maiores". Em seguida o \textit{quicksort} ordena as duas sub-listas de chaves menores e maiores recursivamente até que a lista completa se encontre ordenada \cite{baase}.
 
-\section{Sections and Paragraphs}
+O algoritmo \textit{quicksort} executa os seguintes passos:
 
-Section titles must be in boldface, 13pt, flush left. There should be an extra
-12 pt of space before each title. Section numbering is optional. The first
-paragraph of each section should not be indented, while the first lines of
-subsequent paragraphs should be indented by 1.27 cm.
+\begin{enumerate}
+	\item Escolha um elemento da lista, denominado pivô;
+	\item Rearranje a lista de forma que todos os elementos anteriores ao pivô sejam menores que ele, e todos os elementos posteriores ao pivô sejam maiores que ele. Ao fim do processo o pivô estará em sua posição final e haverão duas sub-listas não-ordenadas. Essa operação é denominada particionamento;
+	\item Recursivamente ordene a sub-lista dos elementos menores e a sub-lista dos elementos maiores.
+\end{enumerate}
 
-\subsection{Subsections}
+A base da recursão são as listas de tamanho zero ou um, que estão sempre ordenadas. O processo é finito, pois a cada iteração pelo menos um elemento é posto em sua posição final e não será mais manipulado na iteração seguinte.
 
-The subsection titles must be in boldface, 12pt, flush left.
+\subsection{Pseudo-Código}
 
-\section{Figures and Captions}\label{sec:figs}
+O Algoritmo~\ref{quicksort} demonstra o pseudo-código para o algoritmo  \textit{quicksort}. Podemos verificar que a função \textit{quicksort} recebe como parâmetros de entrada um \textit{array} e suas posições inicial e final. Logo, o método de particionamento escolhido é chamado e como resultado retorna um elemento pivô. Este pivô é utilizado para realizar as chamadas recursivas das sub-listas à esquerda e direita do elemento pivô. Quando as listas se tornarem de tamanho 1, o algoritmo retorna o \textit{array} devidamente ordenado.
 
+O método \textit{Partition} do Algoritmo~\ref{quicksort} dependerá do particionamento escolhido para executar o algoritmo.
 
-Figure and table captions should be centered if less than one line
-(Figure~\ref{fig:exampleFig1}), otherwise justified and indented by 0.8cm on
-both margins, as shown in Figure~\ref{fig:exampleFig2}. The caption font must
-be Helvetica, 10 point, boldface, with 6 points of space before and after each
-caption.
+\begin{algorithm}[H]
+	\Fn{quicksort (A[], primeiro, ultimo)}{
+		\If{$primeiro < ultimo$}{
+			pivo = Partition(A, primeiro, ultimo)\;
+			quicksort(A, primeiro, pivo-1)\;
+			quicksort(S, pivo+1, ultimo)\;
+		}
+	}
+	\KwResult{O algoritmo retorna o vetor ordenado.}
+	\caption{Pseudo-código do algoritmo \textit{quicksort}.}
+	\label{quicksort}
+\end{algorithm}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.5\textwidth]{fig1.jpg}
-\caption{A typical figure}
-\label{fig:exampleFig1}
-\end{figure}
+\subsection{Dimensão de Desempenho}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.3\textwidth]{fig2.jpg}
-\caption{This figure is an example of a figure caption taking more than one
-  line and justified considering margins mentioned in Section~\ref{sec:figs}.}
-\label{fig:exampleFig2}
-\end{figure}
+Em uma base teórica, podemos determinar o número de comparações de elementos e trocas para comparar o desempenho. Além disso, o tempo de funcionamento real será influenciado por outros fatores, como desempenho de \textit{caches} e escalonamento de \textit{threads}.
 
-In tables, try to avoid the use of colored or shaded backgrounds, and avoid
-thick, doubled, or unnecessary framing lines. When reporting empirical data,
-do not use more decimal digits than warranted by their precision and
-reproducibility. Table caption must be placed before the table (see Table 1)
-and the font used must also be Helvetica, 10 point, boldface, with 6 points of
-space before and after each caption.
+Como será mostrado abaixo, os métodos possuem comportamento semelhante em permutações aleatórias, exceto pelo número de trocas. Aqui, o método de \textit{Lomuto} necessita de três vezes mais trocas do que o particionamento de \textit{Hoare.}
 
-\begin{table}[ht]
-\centering
-\caption{Variables to be considered on the evaluation of interaction
-  techniques}
-\label{tab:exTable1}
-\includegraphics[width=.7\textwidth]{table.jpg}
-\end{table}
+\subsection{Número de Comparações}
 
-\section{Images}
+Ambos os métodos podem ser implementados utilizando ${n - 1}$ comparações para particionar um \textit{array} de comprimento ${n}$. Isto é essencialmente ideal, uma vez que precisamos comparar cada elemento com o pivô para decidir onde colocá-lo.
 
-All images and illustrations should be in black-and-white, or gray tones,
-excepting for the papers that will be electronically available (on CD-ROMs,
-internet, etc.). The image resolution on paper should be about 600 dpi for
-black-and-white images, and 150-300 dpi for grayscale images.  Do not include
-images with excessive resolution, as they may take hours to print, without any
-visible difference in the result. 
+\subsection{Número de Trocas}
 
-\section{References}
+O número de trocas é aleatório para ambos os algoritmos, dependendo dos elementos no \textit{array}. Se assumirmos permutações aleatórias, ou seja, todos os elementos são distintos e cada permutação dos elementos é igualmente provável, podemos analisar o número esperado de trocas.
 
-Bibliographic references must be unambiguous and uniform.  We recommend giving
-the author names references in brackets, e.g. \cite{knuth:84},
-\cite{boulic:91}, and \cite{smith:99}.
+Como apenas a ordem relativa conta, assumimos que os elementos são os números $1, ..., n$. Isso faz com que a discussão abaixo se torne mais fácil pois a posição de um elemento e seu valor coincidem.
 
-The references must be listed using 12 point font size, with 6 points of space
-before each reference. The first line of each reference should not be
-indented, while the subsequent should be indented by 0.5 cm.
+\subsection{Método de \textit{Lomuto}}
+
+A variável índice ${j}$ escaneia o \textit{array} completo e sempre que encontra um elemento ${A[j]}$ menor que o pivô ${x}$, a troca é realizada. Entre os elementos ${1, ..., n}$, exatamente ${x - 1}$ são menores que ${x}$, então nós teremos ${x-1}$ trocas se o pivô for ${x}$.
+
+A expectativa geral então resulta do cálculo da média de todos os pivôs. Segundo \cite{wild}, cada valor em ${\{1, ... ,n\}}$ tem a mesma probabilidade de $\frac{1}{n}$ de se tornar pivô, então serão realizadas
+\begin{equation}
+\frac{1}{n}\sum_{x=1}^{n}(x - 1) = \frac{n}{2} - \frac{1}{2}
+\end{equation} 
+trocas, em média, para particionar um \textit{array} de comprimento ${n}$ com o método de \textit{Lomuto}.
+
+\subsection{Método de \textit{Hoare}}
+
+Para este método, a análise é um pouco mais complexa. Mesmo fixando o pivô ${x}$, o número de trocas permanece aleatório.
+
+Os índices ${i}$ e ${j}$ correm um em direção ao outro até que eles se cruzem, que sempre acontece em ${x}$ (por correção do algoritmo de particionamento de \textit{Hoare}). Isto divide eficazmente o \textit{array} em duas partes: a parte esquerda que é verificada pela variável índice ${i}$ e uma parte direita que é verificada pela variável índice ${j}$.
+
+Agora, uma troca é feita para cada par de elementos "fora do lugar", isto é, um elemento grande (maior do que ${x}$, que pertence a partição direita) que atualmente está localizado na partição esquerda e um elemento pequeno que esteja localizado na partição direita. Note-se que este par formado trabalha sempre para fora, ou seja, o número de pequenos elementos inicialmente na partição direita é igual ao número de grandes elementos na partição esquerda.
+
+\cite{wild} mostra que o número destes pares é hiper geometricamente distribuído ${Hyp(n-1,n-x,x-1)}$: para os ${n - x}$ maiores elementos nós aleatoriamente traçamos suas posições no \textit{array} e temos ${x - 1}$ posições na partição esquerda . Por conseguinte, o número esperado de pares é ${(n-x)(x-1)/(n-1)}$ dado que o pivô é ${x}$.
+
+Segundo \cite{wild}, a média de todos os valores dos pivôs é calcula para obter o número total esperado de trocas para o método de particionamento de \textit{Hoare}:
+
+\begin{equation}
+\frac{1}{n}\sum_{x=1}^{n}\frac{(n - x)(x - 1)}{n - 1} = \frac{n}{6} - \frac{1}{3}.
+\end{equation} 
+
+Mais informações podem ser encontradas em \cite[Pág. 29]{wild}.
+
+\subsection{Padrão de Acesso a Memória}
+
+Ambos os métodos usam dois ponteiros que escaneiam o \textit{array} sequencialmente. Portanto, ambos possuem comportamento quase ideal.
+
+\subsection{Elementos Iguais e Listas Ordenadas}
+
+A performance dos algoritmos diferem mais drasticamente para listas que não estão aleatoriamente permutadas.
+
+Em um \textit{array} já ordenado, o método de \textit{Hoare} não realiza nenhuma troca, já que não existem pares mal posicionados, ao passo que o método de \textit{Lomuto} realiza cerca de ${\frac{n}{2}}$ trocas.
+
+A presença de elementos iguais requere cuidados especiais na utilização do algoritmo \textit{quicksort}. Considere um exemplo extremo onde um \textit{array} é preenchido apenas com elementos ${0}$. Para este \textit{array}, o método de \textit{Hoare} realiza um troca para cada par de elementos - configurando o pior caso para o particionamento de \textit{Hoare} - mas ${i}$ e ${j}$ sempre encontram-se no meio do \textit{array}. Assim, temos um particionamento ideal e o tempo total de execução permanece em ${\mathcal{O}(n \log{}n)}$.
+
+O método de \textit{Lomuto} possui comportamento pior para o \textit{array} apenas com elementos ${0}$: a comparação ${A[j] <= x}$ sempre irá retornar verdadeira, então serão realizadas trocas para todos os elementos. Entretanto piora: após o \textit{loop}, sempre teremos ${i = n}$, então observamos o pior caso de particionamento, fazendo com que a performance do método seja degradada para ${\Theta(n^{2})}$.
+
+\section{Materiais}
+
+\subsection{\textit{Software}}
+O algoritmo \textit{buicksort}foi implementado utilizando a linguagem de programação C. Para a compilação, foi utilizado o compilador gcc (TDM-2 mingw32) versão 4.4.1 2009 \cite{mingw}.
+
+O ambiente de desenvolvimento integrado (IDE - \textit{Integrated Development Environment}) utilizado foi o Code::Blocks versão 13.12 \cite{codeblocks}.
+
+O sistema operacional utilizado para realizar as simulações foi o \textit{Windows} 10 de 64 bits versão \textit{Professional} \cite{windows}. 
+
+\subsection{\textit{Hardware}}
+
+A máquina utilizada para realizar as simulações possui processador AMD Phenom(tm) II X4 B97 Processor 3.20 GHz com três pentes de memória RAM de 4 GB DDR3 2000Mhz, totalizando 12 GB de memória RAM.
+
+\section{Resultados}
+
+Para comparar os métodos, foram escolhidos dez diferentes tamanhos para o \textit{array}: 100, 500, 1.000, 5.000, 30.000, 80.000, 100.000, 150.000 e 200.000 elementos.
+
+Para cada tamanho especificado foram gerados \textit{arrays} de números aleatórios, permitindo valores repetidos. Foram realizadas 20 simulações para cada tamanho em cada método. A média dos tempos de execuções foram utilizadas para realizar a análise comparativa.
+
+%\begin{figure}[ht]
+%	\centering
+%	\includegraphics[width=1\textwidth]{grafico1.png}
+%	\caption{Gráfico comparativo entre os tempo de execução dos métodos de \textit{Hoare} e \textit{Lomuto}.}
+%	\label{graph}
+%\end{figure}
+
+\section{Conclusão}
+
+Podemos concluir que a escolha do método de particionamento tem impacto no resultado final, tal escolha deve levar em conta o tipo de entrada que será submetida ao algoritmo. Para entradas suficientemente grandes o método de particionamento de \textit{Hoare} comporta-se melhor que o método de \textit{Lomuto} obtendo menor tempo de execução.
 
 \bibliographystyle{sbc}
 \bibliography{sbc-template}

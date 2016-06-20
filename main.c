@@ -71,16 +71,16 @@ void bucket_sort(int v[],int tam, int type){
         if(b[i].topo){
             switch (type) {
                 case 1:
-                    //insertionsort(v, tam);
+                    insertionsort(b[i].balde, b[i].topo);
                     break;
                 case 2:
-                    //mergesort(v, tam, sizeof(int), cmpfunc);
+                    mergesort(b[i].balde, b[i].topo, sizeof(int), cmpfunc);
                     break;
                 case 3:
-                    //heapsort(v, tam, sizeof(int), cmpfunc);
+                    heapsort(b[i].balde, b[i].topo, sizeof(int), cmpfunc);
                     break;
                 case 4:
-                    //qsort(v, tam, sizeof(int), cmpfunc)
+                    qsort(b[i].balde, b[i].topo, sizeof(int), cmpfunc);
                     break;
             }
         }
@@ -104,7 +104,7 @@ int main(int argc, const char * argv[]){
 
     int tam[9] = {100, 500, 1000, 5000, 30000, 80000, 100000, 150000, 200000}; //Vetor com os tamanhos de vetores para testes
     int i, j, k, qntd = 0;
-    int simulations = 20;
+    int simulations = 1;
 
     for(j = 0; j < 9; j++){
 
@@ -126,7 +126,7 @@ int main(int argc, const char * argv[]){
 
             for(i = 0; i < qntd; i++){ //Percorre todo o vetor adicionado os valores aleatórios
                 vetI[i] = vetM[i] = vetH[i] = vetQ[i] = (rand()%qntd); //Armazena no vetor o valor aleatório gerado
-                //printf("%d ", vet[i]);
+                //printf("%d ", vetI[i]);
             }
             //printf("\n");
 
@@ -183,6 +183,23 @@ int main(int argc, const char * argv[]){
 
 
         printf("Media: %f %f %f %f\n", mediaI, mediaM, mediaH, mediaQ);
+
+//        for(i = 0; i < qntd; i++){ //Percorre todo o vetor adicionado os valores aleatórios
+//            printf("%d ", vetI[i]);
+//        }
+//        printf("\n");
+//        for(i = 0; i < qntd; i++){ //Percorre todo o vetor adicionado os valores aleatórios
+//            printf("%d ", vetM[i]);
+//        }
+//        printf("\n");
+//        for(i = 0; i < qntd; i++){ //Percorre todo o vetor adicionado os valores aleatórios
+//            printf("%d ", vetH[i]);
+//        }
+//        printf("\n");
+//        for(i = 0; i < qntd; i++){ //Percorre todo o vetor adicionado os valores aleatórios
+//            printf("%d ", vetQ[i]);
+//        }
+//        printf("\n");
 
     }
 

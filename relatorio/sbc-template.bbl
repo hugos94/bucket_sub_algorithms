@@ -1,20 +1,26 @@
 \begin{thebibliography}{}
 
-\bibitem[Boulic and Renault 1991]{boulic:91}
-Boulic, R. and Renault, O. (1991).
-\newblock 3d hierarchies for animation.
-\newblock In Magnenat-Thalmann, N. and Thalmann, D., editors, {\em New Trends
-  in Animation and Visualization}. John Wiley {\&} Sons ltd.
+\bibitem[Code:Blocks 2016]{codeblocks}
+Code:Blocks (2016).
+\newblock Code::blocks.
+\newblock https://www.codeblocks.org/.
+\newblock Acessado em: 11-06-2016.
 
-\bibitem[Knuth 1984]{knuth:84}
-Knuth, D.~E. (1984).
-\newblock {\em The {\TeX} Book}.
-\newblock Addison-Wesley, 15th edition.
+\bibitem[Cormen et~al. 2009]{cormen}
+Cormen, T.~H., Leiserson, C.~E., Rivest, R.~L., and Stein, C. (2009).
+\newblock {\em Introduction to Algorithms, Third Edition}.
+\newblock The MIT Press, 3rd edition.
 
-\bibitem[Smith and Jones 1999]{smith:99}
-Smith, A. and Jones, B. (1999).
-\newblock On the complexity of computing.
-\newblock In Smith-Jones, A.~B., editor, {\em Advances in Computer Science},
-  pages 555--566. Publishing Press.
+\bibitem[Microsoft 2015]{windows}
+Microsoft (2015).
+\newblock Windows 10.
+\newblock https://www.microsoft.com/pt-br/windows/.
+\newblock Acessado em: 11-06-2016.
+
+\bibitem[Mingw 2009]{mingw}
+Mingw (2009).
+\newblock Mingw.
+\newblock https://www.mingw.org/.
+\newblock Acessado em: 11-06-2016.
 
 \end{thebibliography}

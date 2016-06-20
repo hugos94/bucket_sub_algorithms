@@ -1,3 +1,50 @@
-This is BibTeX, Version 0.99cThe top-level auxiliary file: C:\Documents and Settings\nedel\My Documents\SBC-template\template-latex\sbc-template.aux
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: sbc-template.aux
 The style file: sbc.bst
 Database file #1: sbc-template.bib
+Warning--I didn't find a database entry for "hoare"
+Warning--I didn't find a database entry for "baase"
+Warning--I didn't find a database entry for "wild"
+You've used 4 entries,
+            1935 wiz_defined-function locations,
+            493 strings with 4027 characters,
+and the built_in function-call counts, 1159 in all, are:
+= -- 118
+> -- 44
+< -- 3
++ -- 14
+- -- 14
+* -- 78
+:= -- 230
+add.period$ -- 15
+call.type$ -- 4
+change.case$ -- 27
+chr.to.int$ -- 4
+cite$ -- 4
+duplicate$ -- 44
+empty$ -- 69
+format.name$ -- 18
+if$ -- 214
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 2
+newline$ -- 26
+num.names$ -- 12
+pop$ -- 17
+preamble$ -- 1
+purify$ -- 27
+quote$ -- 0
+skip$ -- 37
+stack$ -- 0
+substring$ -- 48
+swap$ -- 1
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 22
+warning$ -- 0
+while$ -- 8
+width$ -- 0
+write$ -- 57
+(There were 3 warnings)
