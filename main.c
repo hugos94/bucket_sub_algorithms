@@ -11,7 +11,6 @@
 #include <stdbool.h>
 #include <time.h>
 #include <windows.h>
-#define tam_bucket 5000
 #define num_bucket 10
 
 struct timeval tv1, tv2;
@@ -21,30 +20,110 @@ typedef struct {
     int* balde;
 }bucket;
 
-void bucket_sort(int v[],int tam, int type);
+void bucketSort(int v[],int tam, int type);
 int cmpfunc (const void * a, const void * b);
-int *insertionsort(int* original, int length);
+void insertionSort(int * vetorDesordenado, int tamanhoVetor );
+void mergeSort(int * vetor, int posicaoInicio, int posicaoFim);
+void heapSort(int * a, int n);
 
-int *insertionsort(int* original, int length){
-    int i, j, atual;
+void insertionSort(int * vetorDesordenado, int tamanhoVetor ){
+   int i, j, valorAtual;
 
-    for (i = 1; i < length; i++){
-        atual = original[i];
-        j = i - 1;
+   for( j=1; j < tamanhoVetor; j++ )
+   {
+      valorAtual = vetorDesordenado[j];
+      i = j-1;
 
-        while ((j >= 0) && (atual < original[j])){
-            original[j + 1] = original[j];
-            j = j - 1;
-        }
+      while(i >= 0 && vetorDesordenado[i] > valorAtual)
+      {
+        vetorDesordenado[i+1] = vetorDesordenado[i];
+        i--;
+      }
 
-        original[j + 1] = atual;
-    }
-
-    return (int*)original;
+      vetorDesordenado[i+1] = valorAtual;
+   }
 }
 
+void mergeSort(int * vetor, int posicaoInicio, int posicaoFim) {
+    int i, j, k, metadeTamanho, *vetorTemp;
 
-void bucket_sort(int* v,int tam, int type){
+    if(posicaoInicio == posicaoFim) return;
+
+    // ordenacao recursiva das duas metades
+    metadeTamanho = (posicaoInicio + posicaoFim ) / 2;
+    mergeSort(vetor, posicaoInicio, metadeTamanho);
+    mergeSort(vetor, metadeTamanho + 1, posicaoFim);
+
+    // intercalacao no vetor temporario t
+    i = posicaoInicio;
+    j = metadeTamanho + 1;
+    k = 0;
+    vetorTemp = (int *) malloc(sizeof(int) * (posicaoFim - posicaoInicio + 1));
+
+    while(i < metadeTamanho + 1 || j  < posicaoFim + 1) {
+        if (i == metadeTamanho + 1 ) { // i passou do final da primeira metade, pegar v[j]
+            vetorTemp[k] = vetor[j];
+            j++;
+            k++;
+        }
+        else {
+            if (j == posicaoFim + 1) { // j passou do final da segunda metade, pegar v[i]
+                vetorTemp[k] = vetor[i];
+                i++;
+                k++;
+            }
+            else {
+                if (vetor[i] < vetor[j]) {
+                    vetorTemp[k] = vetor[i];
+                    i++;
+                    k++;
+                }
+                else {
+                    vetorTemp[k] = vetor[j];
+                    j++;
+                    k++;
+                }
+            }
+        }
+
+    }
+    // copia vetor intercalado para o vetor original
+    for(i = posicaoInicio; i <= posicaoFim; i++) {
+        vetor[i] = vetorTemp[i - posicaoInicio];
+    }
+    free(vetorTemp);
+}
+
+void heapSort(int * a, int n) {
+   int i = n / 2, pai, filho, t;
+   for (;;) {
+      if (i > 0) {
+          i--;
+          t = a[i];
+      } else {
+          n--;
+          if (n == 0) return;
+          t = a[n];
+          a[n] = a[0];
+      }
+      pai = i;
+      filho = i * 2 + 1;
+      while (filho < n) {
+          if ((filho + 1 < n)  &&  (a[filho + 1] > a[filho]))
+              filho++;
+          if (a[filho] > t) {
+             a[pai] = a[filho];
+             pai = filho;
+             filho = pai * 2 + 1;
+          } else {
+             break;
+          }
+      }
+      a[pai] = t;
+   }
+}
+
+void bucketSort(int * v,int tam, int type){
     bucket b[num_bucket];
 
     int i,j,k;
@@ -78,13 +157,15 @@ void bucket_sort(int* v,int tam, int type){
         if(b[i].topo){
             switch (type) {
                 case 1:
-                    insertionsort(b[i].balde, b[i].topo);
+                    insertionSort(b[i].balde, b[i].topo);
                     break;
                 case 2:
                     //mergesort(b[i].balde, b[i].topo, sizeof(int), cmpfunc);
+                    mergeSort(b[i].balde, 0, b[i].topo);
                     break;
                 case 3:
                     //heapsort(b[i].balde, b[i].topo, sizeof(int), cmpfunc);
+                    heapSort(b[i].balde, b[i].topo);
                     break;
                 case 4:
                     qsort(b[i].balde, b[i].topo, sizeof(int), cmpfunc);
@@ -116,8 +197,7 @@ int main(int argc, const char * argv[]){
 
     int tam[9] = {100, 500, 1000, 5000, 30000, 80000, 100000, 150000, 200000}; //Vetor com os tamanhos de vetores para testes
     int i, j, k, qntd = 0;
-    int simulations = 1;
-
+    int simulations = 20;
 
     for(j = 0; j < 9; j++){
 
@@ -136,7 +216,6 @@ int main(int argc, const char * argv[]){
         for(k = 0; k < simulations; k++){
 
             srand(time(NULL)); //Reinicia a semente aleatória
-
             for(i = 0; i < qntd; i++){ //Percorre todo o vetor adicionado os valores aleatórios
                 vetI[i] = vetM[i] = vetH[i] = vetQ[i] = (rand()%qntd); //Armazena no vetor o valor aleatório gerado
                 //printf("%d ", vetI[i]);
@@ -147,7 +226,7 @@ int main(int argc, const char * argv[]){
             //INSERTION SORT
             gettimeofday(&tv1, NULL);
 
-            bucket_sort(vetI, qntd, 1);
+            bucketSort(vetI, qntd, 1);
 
             gettimeofday(&tv2, NULL);
 
@@ -158,7 +237,7 @@ int main(int argc, const char * argv[]){
             //MERGE SORT
             gettimeofday(&tv1, NULL);
 
-            bucket_sort(vetM, qntd, 2);
+            bucketSort(vetM, qntd, 2);
 
             gettimeofday(&tv2, NULL);
 
@@ -169,7 +248,7 @@ int main(int argc, const char * argv[]){
             //HEAP SORT
             gettimeofday(&tv1, NULL);
 
-            bucket_sort(vetH, qntd, 3);
+            bucketSort(vetH, qntd, 3);
 
             gettimeofday(&tv2, NULL);
 
@@ -180,7 +259,7 @@ int main(int argc, const char * argv[]){
             //QUICK SORT
             gettimeofday(&tv1, NULL);
 
-            bucket_sort(vetQ, qntd, 4);
+            bucketSort(vetQ, qntd, 4);
 
             gettimeofday(&tv2, NULL);
 
@@ -199,7 +278,7 @@ int main(int argc, const char * argv[]){
         free(vetH);
         free(vetQ);
 
-        printf("Media: %f %f %f %f\n", mediaI, mediaM, mediaH, mediaQ);
+        printf("Media %d: %f %f %f %f\n", j, mediaI, mediaM, mediaH, mediaQ);
 
 //        for(i = 0; i < qntd; i++){ //Percorre todo o vetor adicionado os valores aleatórios
 //            printf("%d ", vetI[i]);
