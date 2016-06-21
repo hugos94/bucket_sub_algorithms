@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.13)  21 JUN 2016 19:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.13)  21 JUN 2016 20:22
 entering extended mode
 **./sbc-template.tex
 (sbc-template.tex
@@ -226,22 +226,26 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \c@algocf=\count96
 \algocf@algoframe=\box33
 \algocf@algobox=\box34
+)
+("C:\Users\francisco\AppData\Local\Programs\MiKTeX 2.9\tex\latex\placeins\place
+ins.sty"
+Package: placeins 2005/04/18  v 2.2
 ) (sbc-template.aux)
 \openout1 = `sbc-template.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 26.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 27.
 
 ("C:\Users\francisco\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.
 fd"
@@ -298,78 +302,84 @@ f.mkii"
 \everyMPtoPDFconversion=\toks20
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <16> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 28.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 29.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <16> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 28.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 29.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 28.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 29.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 28.
+(Font)              <12> on input line 29.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 28.
+(Font)              <8> on input line 29.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 28.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 28.
+(Font)              <6> on input line 29.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 29.
 
 ("C:\Users\francisco\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.
 fd"
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-LaTeX Font Info:    Try loading font information for OMS+pcr on input line 28.
+LaTeX Font Info:    Try loading font information for OMS+pcr on input line 29.
 
 ("C:\Users\francisco\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\omspcr.
 fd"
 File: omspcr.fd 
 )
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 28.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 29.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 30.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 31.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <13> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 39.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 40.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <13> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 49.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 50.
  [1
 
 {C:/Users/francisco/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-[2] [3] <resultado1.png, id=20, 452.4102pt x 251.0178pt>
-File: resultado1.png Graphic file (type png)
- <use resultado1.png>
-Package pdftex.def Info: resultado1.png used on input line 163.
-(pdftex.def)             Requested size: 426.79135pt x 236.80324pt.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 164.
-
+[2] <bucketSort.png, id=17, 270.25969pt x 203.25937pt>
+File: bucketSort.png Graphic file (type png)
+ <use bucketSort.png>
+Package pdftex.def Info: bucketSort.png used on input line 98.
+(pdftex.def)             Requested size: 256.07741pt x 192.59906pt.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 99.
 
 ("C:\Users\francisco\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ot1phv.
 fd"
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 164.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 99.
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <10> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 164.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 99.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <10> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 164.
- [4] <resultado2.png, id=25, 449.0376pt x 250.536pt>
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 99.
+ [3 <./bucketSort.png>] [4]
+<resultado1.png, id=28, 452.4102pt x 251.0178pt>
+File: resultado1.png Graphic file (type png)
+ <use resultado1.png>
+Package pdftex.def Info: resultado1.png used on input line 183.
+(pdftex.def)             Requested size: 384.1096pt x 213.121pt.
+ [5]
+<resultado2.png, id=32, 449.0376pt x 250.536pt>
 File: resultado2.png Graphic file (type png)
  <use resultado2.png>
-Package pdftex.def Info: resultado2.png used on input line 170.
-(pdftex.def)             Requested size: 426.79135pt x 238.12634pt.
+Package pdftex.def Info: resultado2.png used on input line 191.
+(pdftex.def)             Requested size: 384.1096pt x 214.30988pt.
 
-(sbc-template.bbl [5 <./resultado1.png>]) [6 <./resultado2.png>]
+(sbc-template.bbl [6 <./resultado1.png> <./resultado2.png>]) [7]
 (sbc-template.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 3804 strings out of 493634
- 55486 string characters out of 3133607
- 138168 words of memory out of 3000000
- 7131 multiletter control sequences out of 15000+200000
+ 3826 strings out of 493634
+ 55986 string characters out of 3133607
+ 138317 words of memory out of 3000000
+ 7148 multiletter control sequences out of 15000+200000
  26050 words of font info for 50 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 30i,16n,29p,540b,1774s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,16n,29p,540b,1790s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/francisco/AppData/Local/Programs/MiKTeX 2.9/fonts/enc
 /dvips/fontname/8r.enc}<C:/Users/francisco/AppData/Local/Programs/MiKTeX 2.9/fo
 nts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/francisco/AppData/Local/Progr
@@ -384,9 +394,9 @@ grams/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Users/francisco/AppData/L
 ocal/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/francisco/
 AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/fr
 ancisco/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on sbc-template.pdf (6 pages, 201444 bytes).
+Output written on sbc-template.pdf (7 pages, 220647 bytes).
 PDF statistics:
- 71 PDF objects out of 1000 (max. 8388607)
+ 78 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -6,6 +6,7 @@
 \usepackage[brazil]{babel}
 \usepackage[latin1]{inputenc}
 \usepackage[]{algorithm2e}
+\usepackage{placeins}
 
 \sloppy
 
@@ -48,7 +49,7 @@ Os mais populares algoritmos de ordenação são: \textit{insertionsort}, \textit{s
 
 \section{\textit{Bucketsort}}
 
-O \textit{bucketsort}, também conhecido como algoritmo de ordenação por baldes, funciona em tempo linear quando a entrada é gerada a partir de uma distribuição uniforme. O \textit{bucketsort} é rápido porque pressupõe  que a entrada é gerada por um processo aleatório que distribui elementos uniformementes sobre o intervalo $[0,1)$  \cite{cormen}.
+O \textit{bucketsort}, também conhecido como algoritmo de ordenação por baldes, funciona em tempo linear quando a entrada é gerada a partir de uma distribuição uniforme. O \textit{bucketsort} é rápido porque pressupõe  que a entrada é gerada por um processo aleatório que distribui elementos uniformemente sobre o intervalo $[0,1)$  \cite{cormen}.
 
 \subsection{Estratégia Utilizada}
 
@@ -89,6 +90,15 @@ O primeiro passo do Algoritmo~\ref{bucketsort} é armazenar o tamanho do \textit{
 No próximo passo, um outro \textbf{for} percorre todo o \textit{array} auxiliar de listas ligadas $B$ e aplica um algoritmo de ordenação em cada lista. Qualquer algoritmo de ordenação pode ser utilizado nessa etapa, inclusive o próprio algoritmo \textit{bucketsort} recursivamente. Para esta análise de desempenho, foram utilizados os algoritmos descritos na Seção~\ref{subalgoritmos}.
 
 Por último, o \textit{array} auxiliar de listas ligadas $B$ é concatenado em ordem e gera como resultado os mesmos elementos do \textit{array} $A$ ordenados.
+
+A Figura~\ref{img:bucketsort} demonstra um exemplo de funcionamento do algoritmo \textit{bucketsort} para entradas uniformemente distribuídas entre $[0,1)$. 
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.6\textwidth]{bucketSort.png}
+	\caption{Exemplo do funcionamento do algoritmo \textit{bucketsort} utilizando dois \textit{arrays} para entradas uniformemente distribuídas.}
+	\label{img:bucketsort}
+\end{figure}
 
 \subsection{Complexidade}
 
@@ -140,6 +150,8 @@ Possui complexidade de tempo $\Theta (n \log_{2} n)$ e complexidade de espaço $\
 
 \section{Materiais}
 
+Nesta seção serão apresentados os materiais utilizados para realizar as simulações propostas, tanto em questões de \textit{software}, como de \textit{hardware}.
+
 \subsection{\textit{Software}}
 
 O algoritmo \textit{bucektsort}foi implementado utilizando a linguagem de programação C. Para a compilação, foi utilizado o compilador gcc (TDM-2 mingw32) versão 4.4.1 2009 \cite{mingw}.
@@ -158,24 +170,33 @@ Para comparar os métodos, foram escolhidos dez diferentes tamanhos para o \texti
 
 Para cada tamanho especificado foram gerados \textit{arrays} de números aleatórios, permitindo valores repetidos. Foram realizadas 20 simulações para cada tamanho em cada método. A média dos tempos de execuções foram utilizadas para realizar a análise comparativa.
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=1\textwidth]{resultado1.png}
-	\caption{Gráfico comparativo entre os tempo de execução dos sub-algoritmos de ordenação \textit{Insertion}, \textit{Merge}, \textit{Heap} e \textit{Quick}.}
-	\label{graph1}
-\end{figure}
+Podemos observar na Figura~\ref{graph1} que o subalgoritmo \textit{insertionsort} apresentou os piores tempos médios de execução em relação aos outros algoritmos. Para o tamanho máximo analisado, com 200000 elementos, o algoritmo chegou a utilizar, em média, $60$ segundos em sua execução.
+
+Como os tempos médios do algoritmo \textit{insertionsort} foram bastante elevados, não foi possível identificar os tempos de execução médios dos outros subalgoritmos utilizando a Figura~\ref{graph1}. Para fins de comparação entre os métodos, todos os algoritmos, com exceção do \textit{insertionsort} devido aos seus altos tempos médios de execução, foram comparados.
+
+Podemos observar na Figura~\ref{graph2} que os tempos médios dos algoritmos \textit{mergesort}, \textit{heapsort} e \textit{quicksort} não ultrapassaram $0,09$ segundos. O \textit{quicksort} foi o subalgoritmo com melhores tempos médios de execução, não ultrapassando a barreira de $0,04$ segundos para todos os tamanhos de \textit{arrays} analisados.
+
+Os algoritmos \textit{heapsort} e \textit{mergesort} ficaram com os segundos e terceiros melhores tempos médios de execução para ordenar os baldes no interior do algoritmo \textit{bucketsort}, não ultrapassando a barreira de $0,06$ e $0.08$ segundos, respectivamente.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=1\textwidth]{resultado2.png}
-	\caption{Gráfico comparativo entre os tempo de execução dos sub-algoritmos de ordenação \textit{Merge}, \textit{Heap} e \textit{Quick}.}
+	\includegraphics[width=0.9\textwidth]{resultado1.png}
+	\caption{Gráfico comparativo entre os tempos médios de execução dos sub-algoritmos de ordenação \textit{Insertion}, \textit{Merge}, \textit{Heap} e \textit{Quick}.}
+	\label{graph1}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{resultado2.png}
+	\caption{Gráfico comparativo entre os tempos médios de execução dos sub-algoritmos de ordenação \textit{Merge}, \textit{Heap} e \textit{Quick}.}
 	\label{graph2}
 \end{figure}
 
 
 \section{Conclusão}
 
-Podemos concluir que a escolha do método de particionamento tem impacto no resultado final, tal escolha deve levar em conta o tipo de entrada que será submetida ao algoritmo. Para entradas suficientemente grandes o método de particionamento de \textit{Hoare} comporta-se melhor que o método de \textit{Lomuto} obtendo menor tempo de execução.
+Podemos concluir que a escolha do subalgoritmo utilizado no interior do algoritmo de ordenação \textit{bucketsort} gera grande impacto no resultado final. Quanto melhor for o desempenho do subalgoritmo de ordenação escolhido para a ordenação dos baldes, mais eficiente o \textit{bucketsort} será.
 
 \bibliographystyle{sbc}
 \bibliography{sbc-template}
