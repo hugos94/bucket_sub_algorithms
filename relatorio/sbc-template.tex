@@ -28,7 +28,7 @@
 \maketitle
 
 \begin{abstract}
-	This paper presents a performance analysis of \textit{bucketsort} algorithm with different sorting sub-algorithms, in addition to a general overview of the history and operation of the algorithm.
+	This paper presents a performance analysis of \textit{bucketsort} algorithm with different sorting subalgorithms, in addition to a general overview of the history and operation of the algorithm.
 \end{abstract}
 
 \begin{resumo} 
@@ -44,7 +44,7 @@ Algoritmos descrevem passo a passo os procedimentos para chegar a uma solução de
 
 Algoritmo de ordenação, em ciência da computação, é um algoritmo que coloca os elementos de uma dada sequência em uma certa ordem. Em outras palavras efetua sua ordenação completa ou parcial de acordo com uma necessidade pré-estabelecida. O objetivo da ordenação é facilitar a recuperação dos dados de uma lista.
 
-Os mais populares algoritmos de ordenação são: \textit{insertionsort}, \textit{selectionsort}, \textit{bubblesort}, \textit{combsort}, \textit{quicksort}, \textit{mergesort}, \textit{heapsort} e \textit{shellsort}. Neste artigo, o algoritmo \textit{quicksort} será analisado, explicando o seu funcionamento, suas peculiaridades e o comportamento do seu particionamento.
+Os mais populares algoritmos de ordenação são: \textit{insertionsort}, \textit{selectionsort}, \textit{bubblesort}, \textit{bucketsort}, \textit{quicksort}, \textit{mergesort}, \textit{heapsort} e \textit{shellsort}. Neste artigo, o algoritmo \textit{bucketsort} será analisado, explicando seu funcionamento, suas peculiaridades e seu comportamento quando os subalgoritmos \textit{insertionsort}, \textit{mergesort}, \textit{heapsort} e \textit{quicksort} são utilizados.
 
 \section{\textit{Bucketsort}}
 
@@ -160,14 +160,14 @@ Para cada tamanho especificado foram gerados \textit{arrays} de números aleatóri
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=1\textwidth]{resultado1.jpg}
+	\includegraphics[width=1\textwidth]{resultado1.png}
 	\caption{Gráfico comparativo entre os tempo de execução dos sub-algoritmos de ordenação \textit{Insertion}, \textit{Merge}, \textit{Heap} e \textit{Quick}.}
 	\label{graph1}
 \end{figure}
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=1\textwidth]{resultado2.jpg}
+	\includegraphics[width=1\textwidth]{resultado2.png}
 	\caption{Gráfico comparativo entre os tempo de execução dos sub-algoritmos de ordenação \textit{Merge}, \textit{Heap} e \textit{Quick}.}
 	\label{graph2}
 \end{figure}
