@@ -1,10 +1,38 @@
 \begin{thebibliography}{}
 
+\bibitem[Baase 1988]{baase}
+Baase, S. (1988).
+\newblock {\em Computer algorithms : introduction to design and analysis}.
+\newblock Addison-Wesley series in computer science. Addison-Wesley, Reading
+  Mass.
+
 \bibitem[Code:Blocks 2016]{codeblocks}
 Code:Blocks (2016).
 \newblock Code::blocks.
 \newblock https://www.codeblocks.org/.
 \newblock Acessado em: 11-06-2016.
+
+\bibitem[Cormen et~al. 2009]{cormen}
+Cormen, T.~H., Leiserson, C.~E., Rivest, R.~L., and Stein, C. (2009).
+\newblock {\em Introduction to Algorithms, Third Edition}.
+\newblock The MIT Press, 3rd edition.
+
+\bibitem[Hoare 1961]{hoare}
+Hoare, C. A.~R. (1961).
+\newblock Algorithm 64: Quicksort.
+\newblock {\em Commun. ACM}, 4(7):321--.
+
+\bibitem[Knuth 1998a]{knuth}
+Knuth, D. (1998a).
+\newblock Section 5.2.1: Sorting by insertion.
+\newblock {\em Sorting and Searching. The Art of Computer Programming 3 (2nd
+  ed.)}.
+
+\bibitem[Knuth 1998b]{john}
+Knuth, D. (1998b).
+\newblock Section 5.2.4: Sorting by merging.
+\newblock {\em Sorting and Searching. The Art of Computer Programming 3 (2nd
+  ed.)}.
 
 \bibitem[Microsoft 2015]{windows}
 Microsoft (2015).
@@ -17,5 +45,10 @@ Mingw (2009).
 \newblock Mingw.
 \newblock https://www.mingw.org/.
 \newblock Acessado em: 11-06-2016.
+
+\bibitem[Williams 1964]{williams}
+Williams, J. W.~J. (1964).
+\newblock Algorithm 232 - heapsort.
+\newblock {\em Communications of the ACM}, 7(6):347--349.
 
 \end{thebibliography}

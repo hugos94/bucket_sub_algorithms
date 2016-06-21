@@ -32,7 +32,7 @@
 \end{abstract}
 
 \begin{resumo} 
-	Este trabalho apresenta uma análise de desempenho do algoritmo de ordenação \textit{buicksort} com diferentes subalgoritmos de ordenação, além de apresentar um resumo geral sobre a história e funcionamento do algoritmo. 
+	Este trabalho apresenta uma análise de desempenho do algoritmo de ordenação \textit{bucketsort} com diferentes subalgoritmos de ordenação, além de apresentar um resumo geral sobre a história e funcionamento do algoritmo. 
 \end{resumo}
 
 
@@ -48,101 +48,101 @@ Os mais populares algoritmos de ordenação são: \textit{insertionsort}, \textit{s
 
 \section{\textit{Bucketsort}}
 
-\section{Estratégia Utilizada}
+O \textit{bucketsort}, também conhecido como algoritmo de ordenação por baldes, funciona em tempo linear quando a entrada é gerada a partir de uma distribuição uniforme. O \textit{bucketsort} é rápido porque pressupõe  que a entrada é gerada por um processo aleatório que distribui elementos uniformementes sobre o intervalo $[0,1)$  \cite{cormen}.
 
-O \textit{quicksort} adota a estratégia de divisão e conquista. Essa estratégia consiste em rearranjar as chaves do problema de modo que chaves "menores" precedam chaves "maiores". Em seguida o \textit{quicksort} ordena as duas sub-listas de chaves menores e maiores recursivamente até que a lista completa se encontre ordenada \cite{baase}.
+\subsection{Estratégia Utilizada}
 
-O algoritmo \textit{quicksort} executa os seguintes passos:
+O \textit{bucketsort} adota a estratégia de dividir o intervalo $[0,1)$ em $n$ subintervalos de igual tamanho, ou \textbf{baldes}, e depois distribuir os $n$ números de entrada entre os baldes. Tendo em vista que as entradas são uniformemente distribuídas sobre $[0,1)$, não esperamos que muitos números caiam em cada balde. Para produzir a saída, simplesmente ordenamos os números em cada balde, e depois percorremos os baldes em ordem, listando os elementos contidos em cada um \cite{cormen}.
 
+O algoritmo \textit{bucketsort} funciona do seguinte modo:
 \begin{enumerate}
-	\item Escolha um elemento da lista, denominado pivô;
-	\item Rearranje a lista de forma que todos os elementos anteriores ao pivô sejam menores que ele, e todos os elementos posteriores ao pivô sejam maiores que ele. Ao fim do processo o pivô estará em sua posição final e haverão duas sub-listas não-ordenadas. Essa operação é denominada particionamento;
-	\item Recursivamente ordene a sub-lista dos elementos menores e a sub-lista dos elementos maiores.
+	\item Inicialize um vetor de "baldes", inicialmente vazios;
+	\item Vá para o vetor original, incluindo cada elemento em um balde;
+	\item \label{passo} Ordene todos os baldes não vazios;
+	\item Coloque os elementos dos baldes que não estão vazios no vetor original.
 \end{enumerate}
 
-A base da recursão são as listas de tamanho zero ou um, que estão sempre ordenadas. O processo é finito, pois a cada iteração pelo menos um elemento é posto em sua posição final e não será mais manipulado na iteração seguinte.
+O passo \ref{passo} do funcionamento do algoritmo \textit{bucketsort} pode ser realizado de duas maneiras. A primeira é chamar recursivamente o algoritmo \textit{bucketsort} para realizar a ordenação dos baldes. A segunda maneira é utilizar qualquer outro algoritmo de ordenação para ordenar os baldes não vazios. Este artigo analisa o desempenho obtido com a utilização da segunda maneira.
+
+Na análise realizada, foram utilizados 4 algoritmos de ordenação diferentes. Foram escolhidos os algoritmos: \textit{insertionsort}, \textit{mergesort}, \textit{heapsort} e \textit{quicksort}.
 
 \subsection{Pseudo-Código}
 
-O Algoritmo~\ref{quicksort} demonstra o pseudo-código para o algoritmo  \textit{quicksort}. Podemos verificar que a função \textit{quicksort} recebe como parâmetros de entrada um \textit{array} e suas posições inicial e final. Logo, o método de particionamento escolhido é chamado e como resultado retorna um elemento pivô. Este pivô é utilizado para realizar as chamadas recursivas das sub-listas à esquerda e direita do elemento pivô. Quando as listas se tornarem de tamanho 1, o algoritmo retorna o \textit{array} devidamente ordenado.
-
-O método \textit{Partition} do Algoritmo~\ref{quicksort} dependerá do particionamento escolhido para executar o algoritmo.
+O Algoritmo~\ref{bucketsort} demonstra o pseudo-código para o algoritmo  \textit{bucketsort}. Podemos verificar que a função \textit{bucketsort} recebe como parâmetro apenas o \textit{array} a ser ordenado. Este pseudo-código pressupõe que a entrada é um arranjo de $n$ elementos $A$, e que cada elemento $A[i]$ no arranjo satisfaz a $0 \leq A[i] \leq 1$. O código exige um \textit{array} auxiliar $B[0 .. n - 1]$ de listas ligadas (baldes) e pressupõe que existe um mecanismo para manter tais listas. 
 
 \begin{algorithm}[H]
-	\Fn{quicksort (A[], primeiro, ultimo)}{
-		\If{$primeiro < ultimo$}{
-			pivo = Partition(A, primeiro, ultimo)\;
-			quicksort(A, primeiro, pivo-1)\;
-			quicksort(S, pivo+1, ultimo)\;
+	\Fn{bucketsort (A[])}{
+		n = comprimento[A]\;
+		\For{$i = 0; i < n; i = i + 1$}{
+			inserir A[i] na lista B[$\lfloor$ A[i] $\rfloor$ ]\;
 		}
+		\For{$i = 0; i < n - 1; i = i + 1$}{ordenar lista B[i] com qualquer algoritmo de ordenação (inclusive o próprio \textit{bucketsort})\;}
+		concatenar as listas B[0], B[1], ..., B[n - 1] juntas em ordem
 	}
 	\KwResult{O algoritmo retorna o vetor ordenado.}
-	\caption{Pseudo-código do algoritmo \textit{quicksort}.}
-	\label{quicksort}
+	\caption{Pseudo-código do algoritmo \textit{bucketsort}.}
+	\label{bucketsort}
 \end{algorithm}
 
-\subsection{Dimensão de Desempenho}
+O primeiro passo do Algoritmo~\ref{bucketsort} é armazenar o tamanho do \textit{array}. Logo após, um \textbf{for} percorre todo o \textit{array} $A$ e insere os elementos visitados no \textit{array} auxiliar de listas ligadas $B$.
 
-Em uma base teórica, podemos determinar o número de comparações de elementos e trocas para comparar o desempenho. Além disso, o tempo de funcionamento real será influenciado por outros fatores, como desempenho de \textit{caches} e escalonamento de \textit{threads}.
+No próximo passo, um outro \textbf{for} percorre todo o \textit{array} auxiliar de listas ligadas $B$ e aplica um algoritmo de ordenação em cada lista. Qualquer algoritmo de ordenação pode ser utilizado nessa etapa, inclusive o próprio algoritmo \textit{bucketsort} recursivamente. Para esta análise de desempenho, foram utilizados os algoritmos descritos na Seção~\ref{subalgoritmos}.
 
-Como será mostrado abaixo, os métodos possuem comportamento semelhante em permutações aleatórias, exceto pelo número de trocas. Aqui, o método de \textit{Lomuto} necessita de três vezes mais trocas do que o particionamento de \textit{Hoare.}
+Por último, o \textit{array} auxiliar de listas ligadas $B$ é concatenado em ordem e gera como resultado os mesmos elementos do \textit{array} $A$ ordenados.
 
-\subsection{Número de Comparações}
+\subsection{Complexidade}
 
-Ambos os métodos podem ser implementados utilizando ${n - 1}$ comparações para particionar um \textit{array} de comprimento ${n}$. Isto é essencialmente ideal, uma vez que precisamos comparar cada elemento com o pivô para decidir onde colocá-lo.
+A complexidade do algoritmo \textit{bucketsort} depende do subalgoritmo utilizado em seu interior para realizar a ordenação dos baldes. 
 
-\subsection{Número de Trocas}
+Segundo Cormen \cite{cormen}, quando o subalgoritmo utilizado for o próprio \textit{bucketsort}, o tempo esperado a partir de uma distribuição uniforme é $\Theta(n) + n * \mathcal{O}(2-1/n) = \Theta(n)$, dessa forma, funcionando em tempo linear.
 
-O número de trocas é aleatório para ambos os algoritmos, dependendo dos elementos no \textit{array}. Se assumirmos permutações aleatórias, ou seja, todos os elementos são distintos e cada permutação dos elementos é igualmente provável, podemos analisar o número esperado de trocas.
+Mesmo que a entrada não seja obtida a partir de uma distribuição uniforme, o \textit{bucketsort} ainda pode ser executado em tempo linear, pois a entrada tem a propriedade de que a soma dos quadrados dos tamanhos de baldes é linear no número total de elementos.
 
-Como apenas a ordem relativa conta, assumimos que os elementos são os números $1, ..., n$. Isso faz com que a discussão abaixo se torne mais fácil pois a posição de um elemento e seu valor coincidem.
+Porém, quando outros algoritmos de ordenação forem utilizados para realizar a ordenação dos baldes, a complexidade dependerá do subalgoritmo utilizado.
 
-\subsection{Método de \textit{Lomuto}}
+\section{Subalgoritmos} \label{subalgoritmos}
 
-A variável índice ${j}$ escaneia o \textit{array} completo e sempre que encontra um elemento ${A[j]}$ menor que o pivô ${x}$, a troca é realizada. Entre os elementos ${1, ..., n}$, exatamente ${x - 1}$ são menores que ${x}$, então nós teremos ${x-1}$ trocas se o pivô for ${x}$.
+Esta seção descreve os subalgoritmos utilizados para realizar a análise de desempenho do algoritmo \textit{bucketsort}.
 
-A expectativa geral então resulta do cálculo da média de todos os pivôs. Segundo \cite{wild}, cada valor em ${\{1, ... ,n\}}$ tem a mesma probabilidade de $\frac{1}{n}$ de se tornar pivô, então serão realizadas
-\begin{equation}
-\frac{1}{n}\sum_{x=1}^{n}(x - 1) = \frac{n}{2} - \frac{1}{2}
-\end{equation} 
-trocas, em média, para particionar um \textit{array} de comprimento ${n}$ com o método de \textit{Lomuto}.
+\subsection{Insertion Sort}
 
-\subsection{Método de \textit{Hoare}}
+O \textit{insertionsort}, ou ordenação por inserção, é um simples algoritmo de ordenação, eficiente quando aplicado a um pequeno número de elementos. Em termos gerais, ele percorre um vetor de elementos da esquerda para a direita e à medida que avança vai deixando os elementos mais à esquerda ordenados \cite{knuth}. O algoritmo de inserção funciona da mesma maneira com que muitas pessoas ordenam cartas em um jogo de baralho como o pôquer.
 
-Para este método, a análise é um pouco mais complexa. Mesmo fixando o pivô ${x}$, o número de trocas permanece aleatório.
+Possui o menor número de trocas e comparações entre os algoritmos de ordenação $\mathcal{O}(n)$ quando o vetor está ordenado e em seu pior caso possui complexidade $\mathcal{O}(n^2)$.
 
-Os índices ${i}$ e ${j}$ correm um em direção ao outro até que eles se cruzem, que sempre acontece em ${x}$ (por correção do algoritmo de particionamento de \textit{Hoare}). Isto divide eficazmente o \textit{array} em duas partes: a parte esquerda que é verificada pela variável índice ${i}$ e uma parte direita que é verificada pela variável índice ${j}$.
+\subsection{Merge Sort}
 
-Agora, uma troca é feita para cada par de elementos "fora do lugar", isto é, um elemento grande (maior do que ${x}$, que pertence a partição direita) que atualmente está localizado na partição esquerda e um elemento pequeno que esteja localizado na partição direita. Note-se que este par formado trabalha sempre para fora, ou seja, o número de pequenos elementos inicialmente na partição direita é igual ao número de grandes elementos na partição esquerda.
+O \textit{mergesort}, ou ordenação por mistura, é um exemplo de algoritmo de ordenação do tipo dividir-para-conquistar. Foi inventado em 1945 por John von Neumann \cite{john}.
 
-\cite{wild} mostra que o número destes pares é hiper geometricamente distribuído ${Hyp(n-1,n-x,x-1)}$: para os ${n - x}$ maiores elementos nós aleatoriamente traçamos suas posições no \textit{array} e temos ${x - 1}$ posições na partição esquerda . Por conseguinte, o número esperado de pares é ${(n-x)(x-1)/(n-1)}$ dado que o pivô é ${x}$.
+Sua ideia básica consiste em Dividir (o problema em vários sub-problemas e resolver esses sub-problemas através de chamadas recursivas) e Conquistar (após todos os sub-problemas terem sido resolvidos ocorre a conquista que é a união das resoluções dos sub-problemas). Como o algoritmo \textit{mergesort} usa recursividade, há um alto consumo de memória e tempo de execução, tornando esta técnica não muito eficiente para alguns problemas.
 
-Segundo \cite{wild}, a média de todos os valores dos pivôs é calcula para obter o número total esperado de trocas para o método de particionamento de \textit{Hoare}:
+Possui complexidade de tempo $\Theta (n \log_{2} n)$ e complexidade de espaço $\Theta (n)$ para todos os casos.
 
-\begin{equation}
-\frac{1}{n}\sum_{x=1}^{n}\frac{(n - x)(x - 1)}{n - 1} = \frac{n}{6} - \frac{1}{3}.
-\end{equation} 
+\subsection{Heap Sort}
 
-Mais informações podem ser encontradas em \cite[Pág. 29]{wild}.
+O algoritmo \textit{heapsort}  é um algoritmo de ordenação generalista, e faz parte da família de algoritmos de ordenação por seleção. Foi inventado em 1964 por J.W.J Williams \cite{williams}.
 
-\subsection{Padrão de Acesso a Memória}
+O \textit{heapsort} utiliza uma estrutura de dados chamada \textit{heap}, para ordenar os elementos à medida que os insere na estrutura. Assim, ao final das inserções, os elementos podem ser sucessivamente removidos da raiz da \textit{heap}, na ordem desejada, lembrando-se sempre de manter a propriedade de \textit{max-heap}.
 
-Ambos os métodos usam dois ponteiros que escaneiam o \textit{array} sequencialmente. Portanto, ambos possuem comportamento quase ideal.
+A \textit{heap} pode ser representada como uma árvore binária com propriedades especiais ou como um vetor \cite{baase}. Para uma ordenação decrescente, deve ser construída uma \textit{heap} mínima (o menor elemento fica na raiz). Para uma ordenação crescente, deve ser construído uma \textit{heap} máxima (o maior elemento fica na raiz).
 
-\subsection{Elementos Iguais e Listas Ordenadas}
+Possui complexidade de tempo $\Theta (n \log_{2} n)$ e complexidade de espaço $\Theta (n)$ para todos os casos.
 
-A performance dos algoritmos diferem mais drasticamente para listas que não estão aleatoriamente permutadas.
+\subsection{Quick Sort}
 
-Em um \textit{array} já ordenado, o método de \textit{Hoare} não realiza nenhuma troca, já que não existem pares mal posicionados, ao passo que o método de \textit{Lomuto} realiza cerca de ${\frac{n}{2}}$ trocas.
+O algoritmo \textit{quicksort} é um método de ordenação muito rápido e eficiente, inventado em 1961 por C.A.R. Hoare \cite{hoare}.
 
-A presença de elementos iguais requere cuidados especiais na utilização do algoritmo \textit{quicksort}. Considere um exemplo extremo onde um \textit{array} é preenchido apenas com elementos ${0}$. Para este \textit{array}, o método de \textit{Hoare} realiza um troca para cada par de elementos - configurando o pior caso para o particionamento de \textit{Hoare} - mas ${i}$ e ${j}$ sempre encontram-se no meio do \textit{array}. Assim, temos um particionamento ideal e o tempo total de execução permanece em ${\mathcal{O}(n \log{}n)}$.
+O \textit{quicksort} é um algoritmo de ordenação por comparação não-estável e adota a estratégia de divisão e conquista. 
 
-O método de \textit{Lomuto} possui comportamento pior para o \textit{array} apenas com elementos ${0}$: a comparação ${A[j] <= x}$ sempre irá retornar verdadeira, então serão realizadas trocas para todos os elementos. Entretanto piora: após o \textit{loop}, sempre teremos ${i = n}$, então observamos o pior caso de particionamento, fazendo com que a performance do método seja degradada para ${\Theta(n^{2})}$.
+A estratégia consiste em rearranjar as chaves de modo que chaves menores precedam chaves maiores. Em seguida o \textit{quicksort} ordena as duas sublistas de chaves menores e maiores recursivamente até que a lista completa se encontre ordenada.
+
+Possui complexidade de tempo $\Theta (n \log_{2} n)$ e complexidade de espaço $\Theta ( \log_{2} n)$ para o melhor caso e o caso médio. Para o pior caso, possui complexidade de tempo e espaço $\Theta (n^2)$.
 
 \section{Materiais}
 
 \subsection{\textit{Software}}
-O algoritmo \textit{buicksort}foi implementado utilizando a linguagem de programação C. Para a compilação, foi utilizado o compilador gcc (TDM-2 mingw32) versão 4.4.1 2009 \cite{mingw}.
+
+O algoritmo \textit{bucektsort}foi implementado utilizando a linguagem de programação C. Para a compilação, foi utilizado o compilador gcc (TDM-2 mingw32) versão 4.4.1 2009 \cite{mingw}.
 
 O ambiente de desenvolvimento integrado (IDE - \textit{Integrated Development Environment}) utilizado foi o Code::Blocks versão 13.12 \cite{codeblocks}.
 
